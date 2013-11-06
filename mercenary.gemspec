@@ -6,11 +6,11 @@ require 'mercenary/version'
 Gem::Specification.new do |spec|
   spec.name          = "mercenary"
   spec.version       = Mercenary::VERSION
-  spec.authors       = ["Parker Moore"]
-  spec.email         = ["parkrmoore@gmail.com"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
-  spec.homepage      = ""
+  spec.authors       = ["Tom Preston-Werner", "Parker Moore"]
+  spec.email         = ["tom@mojombo.com", "parkrmoore@gmail.com"]
+  spec.description   = %q{Lightweight and flexible library for writing command-line apps in Ruby.}
+  spec.summary       = %q{Lightweight and flexible library for writing command-line apps in Ruby.}
+  spec.homepage      = "https://github.com/jekyll/mercenary"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
