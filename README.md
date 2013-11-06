@@ -1,6 +1,6 @@
 # Mercenary
 
-TODO: Write a gem description
+Lightweight and flexible library for writing command-line apps in Ruby.
 
 ## Installation
 
@@ -18,7 +18,39 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+Mercenary.program(:jekyll) do |p|
+  p.version Jekyll::VERSION
+  p.description 'Jekyll is a blog-aware, static site generator in Ruby'
+
+  p.command(:new) do |c|
+    c.syntax "jekyll new PATH"
+    c.description "Creates a new Jekyll site scaffold in PATH"
+
+    c.action do |args, options|
+      Jekyll::Commands::New.process(args)
+    end
+  end
+
+  p.command(:import) do |c|
+    c.syntax "jekyll import <platform> [options]"
+    c.description "Import your old blog to Jekyll"
+
+    c.action do |args, options|
+      begin
+        require "jekyll-import"
+      rescue
+        msg  = "You must install the 'jekyll-import' gem before continuing.\n"
+        msg += "* Do this by running `gem install jekyll-import`.\n"
+        msg += "* Or if you need root privileges, run `sudo gem install jekyll-import`."
+        abort msg
+      end
+
+      Jekyll::Commands::Import.process(args.first, options)
+    end
+  end
+end
+```
 
 ## Contributing
 
