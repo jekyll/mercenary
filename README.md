@@ -2,6 +2,8 @@
 
 Lightweight and flexible library for writing command-line apps in Ruby.
 
+[![Build Status](https://secure.travis-ci.org/jekyll/mercenary.png)](https://travis-ci.org/jekyll/mercenary)
+
 ## Installation
 
 Add this line to your application's Gemfile:
