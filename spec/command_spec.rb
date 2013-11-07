@@ -39,17 +39,16 @@ describe(Mercenary::Command) do
 
     it "can set its description" do
       desc = "run all the things"
-      cmd = described_class.new(:my_name)
-      cmd.description desc
-      expect(cmd.description).to eq(desc)
+      command.description desc
+      expect(command.description).to eq(desc)
     end
 
     it "can set its options" do
-      desc = "run all the things"
-c.option 'show_drafts', '--drafts', 'Render posts in the _drafts folder
-      cmd = described_class.new(:my_name)
-      cmd.description desc
-      expect(cmd.description).to eq(desc)
+      name = "show_drafts"
+      opt  = ['--drafts', 'Render posts in the _drafts folder']
+      command.option name, *opt
+      expect(command.options).to eq([opt])
+      expect(command.map).to include({opt.first => name})
     end
   end
 
