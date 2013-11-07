@@ -18,12 +18,14 @@ module Mercenary
       @parent = parent
     end
 
-    def syntax(syntax)
-      @syntax = syntax
+    def syntax(syntax = nil)
+      @syntax = syntax if syntax
+      @syntax
     end
 
-    def description(desc)
-      @description = desc
+    def description(desc = nil)
+      @description = desc if desc
+      @description
     end
 
     def option(sym, *options)
