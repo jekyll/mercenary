@@ -1,8 +1,9 @@
 lib = File.expand_path('../', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
-require 'mercenary/version'
+require "mercenary/version"
 require "optparse"
+require "logger"
 
 module Mercenary
   autoload :Command, "mercenary/command"
