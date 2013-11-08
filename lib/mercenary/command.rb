@@ -93,7 +93,7 @@ module Mercenary
     # level - the logger level (a Logger constant, see docs for more info)
     #
     # Returns the instance of Logger
-    def logger(level = Logger::DEBUG)
+    def logger(level = Logger::INFO)
       unless @logger
         @logger = Logger.new(STDOUT)
         @logger.formatter = proc do |severity, datetime, progname, msg|
