@@ -46,7 +46,7 @@ module Mercenary
 
       logger.debug("Parsed config: #{@config.inspect}")
 
-      cmd.actions.each { |a| a.call(argv, @config) }
+      cmd.execute(argv, @config)
     end
   end
 end
