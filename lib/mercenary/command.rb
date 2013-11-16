@@ -143,8 +143,8 @@ module Mercenary
 
     # Public: Execute all actions given the inputted args and options
     #
-    # argv - command-line args (sans opts)
-    # config - the Hash configuration of string key to value
+    # argv - (optional) command-line args (sans opts)
+    # config - (optional) the Hash configuration of string key to value
     #
     # Returns nothing
     def execute(argv = [], config = {})
