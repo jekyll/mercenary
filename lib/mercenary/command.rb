@@ -45,6 +45,25 @@ module Mercenary
       @description
     end
 
+    # Public: Sets the default command
+    #
+    # command_name - the command name to be executed in the event no args are
+    #                present
+    #
+    # Returns the default command if there is one, `nil` otherwise
+    def default_command(command_name = nil)
+      if command_name
+        if commands.has_key?(command_name)
+          @default_command = commands[command_name] if command_name
+          @default_command
+        else
+          raise ArgumentError.new("'#{command_name}' couldn't be found in this command's list of commands.")
+        end
+      else
+        @default_command
+      end
+    end
+
     # Public: Adds an option switch
     #
     # sym - the variable key which is used to identify the value of the switch
@@ -79,8 +98,6 @@ module Mercenary
       @parent.commands[cmd_name] = self
     end
 
-    # Public: Add an action Proc to be executed at runtime
-    #
     # block - the Proc to be executed at runtime
     #
     # Returns nothing
@@ -148,7 +165,11 @@ module Mercenary
     #
     # Returns nothing
     def execute(argv = [], config = {})
-      actions.each { |a| a.call(argv, config) }
+      if actions.empty? && !default_command.nil?
+        default_command.execute
+      else
+        actions.each { |a| a.call(argv, config) }
+      end
     end
 
     # Public: Check if this command has a subcommand
