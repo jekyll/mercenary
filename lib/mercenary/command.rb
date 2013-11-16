@@ -98,6 +98,8 @@ module Mercenary
       @parent.commands[cmd_name] = self
     end
 
+    # Public: Add an action Proc to be executed at runtime
+    #
     # block - the Proc to be executed at runtime
     #
     # Returns nothing
