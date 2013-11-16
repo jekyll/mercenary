@@ -10,6 +10,8 @@
 
 ### Development Fixes
 
+* Add standard GitHub bootstrap and cibuild scripts to `script/` (#2)
+
 ## 0.1.0 / 2013-11-08
 
 ### Major Enhancements
