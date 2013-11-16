@@ -4,6 +4,8 @@
 
 ### Minor Enhancements
 
+* Add `Command#execute` to execute the actions of a command (#6)
+
 ### Bug Fixes
 
 ### Development Fixes
