@@ -141,6 +141,16 @@ module Mercenary
       end
     end
 
+    # Public: Execute all actions given the inputted args and options
+    #
+    # argv - (optional) command-line args (sans opts)
+    # config - (optional) the Hash configuration of string key to value
+    #
+    # Returns nothing
+    def execute(argv = [], config = {})
+      actions.each { |a| a.call(argv, config) }
+    end
+
     # Public: Check if this command has a subcommand
     #
     # sub_command - the name of the subcommand
