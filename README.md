@@ -34,6 +34,19 @@ Mercenary.program(:jekyll) do |p|
     end
   end
 
+  p.command(:build) do |c|
+    c.syntax "jekyll build [options]"
+    c.description "Builds your Jekyll site"
+
+    c.option 'safe', '--safe', 'Run in safe mode'
+    c.option 'source', '--source DIR', 'From where to collect the source files'
+    c.option 'destination', '--dest DIR', 'To where the compiled files should be written'
+
+    c.action do |_, options|
+      Jekyll::Commands::Build.process(options)
+    end
+  end
+
   p.command(:import) do |c|
     c.syntax "jekyll import <platform> [options]"
     c.description "Import your old blog to Jekyll"
@@ -51,6 +64,8 @@ Mercenary.program(:jekyll) do |p|
       Jekyll::Commands::Import.process(args.first, options)
     end
   end
+
+  p.default_command(:build)
 end
 ```
 
