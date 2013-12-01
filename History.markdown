@@ -2,6 +2,9 @@
 
 ### Major Enhancements
 
+* Add `Command#default_command` to specify a default command if none is given
+  by the user at runtime (#7)
+
 ### Minor Enhancements
 
 * Add `Command#execute` to execute the actions of a command (#6)
