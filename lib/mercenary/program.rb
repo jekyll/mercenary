@@ -36,7 +36,7 @@ module Mercenary
       @optparse = OptionParser.new do |opts|
         cmd = super(argv, opts, @config)
 
-        opts.on('-v' '--version', 'Print the version') do
+        opts.on('-v', '--version', 'Print the version') do
           puts "#{name} #{version}"
           abort
         end
