@@ -6,6 +6,8 @@
 
 ### Bug Fixes
 
+* Added missing comma to fix '-v' and '--version' options (#9)
+
 ### Development Fixes
 
 ## 0.2.0 / 2013-11-30
