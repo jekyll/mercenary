@@ -8,6 +8,8 @@
 
 ### Development Fixes
 
+* Added specs for `Program` (#13)
+
 ## 0.2.1 / 2013-12-25
 
 ### Bug Fixes
