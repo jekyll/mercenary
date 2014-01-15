@@ -112,15 +112,23 @@ module Mercenary
     # level - the logger level (a Logger constant, see docs for more info)
     #
     # Returns the instance of Logger
-    def logger(level = Logger::INFO)
+    def logger(level = nil)
       unless @logger
         @logger = Logger.new(STDOUT)
         @logger.formatter = proc do |severity, datetime, progname, msg|
           "#{ident} (#{severity}): #{msg}\n"
         end
+
+        if level == nil
+          @logger.level = Logger::INFO
+        end
+
       end
 
-      @logger.level = level
+      unless level.nil? 
+        @logger.level = level
+      end
+
       @logger
     end
 
