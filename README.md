@@ -18,6 +18,8 @@ Or install it yourself as:
 
     $ gem install mercenary
 
+**Note: Mercenary requires Ruby >= 1.9.2.**
+
 ## Usage
 
 ```ruby
