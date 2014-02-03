@@ -2,6 +2,8 @@
 
 ### Major Enhancements
 
+* Officially drop 1.8.7 support (#14)
+
 ### Minor Enhancements
 
 ### Bug Fixes
