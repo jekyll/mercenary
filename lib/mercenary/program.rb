@@ -25,7 +25,7 @@ module Mercenary
 
     # Public: Run the program
     #
-    # argv   - an array of string args (usually ARGV)
+    # argv - an array of string args (usually ARGV)
     #
     # Returns nothing
     def go(argv)
