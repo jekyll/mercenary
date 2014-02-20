@@ -6,6 +6,8 @@
 
 ### Minor Enhancements
 
+* Logging state is maintained throughout process (#12)
+
 ### Bug Fixes
 
 ### Development Fixes
