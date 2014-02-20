@@ -8,6 +8,7 @@ module Mercenary
     attr_accessor :actions
     attr_reader :map
     attr_accessor :parent
+    attr_reader :trace
 
     # Public: Creates a new Command
     #
@@ -17,12 +18,13 @@ module Mercenary
     #
     # Returns nothing
     def initialize(name, parent = nil)
-      @name = name
-      @options = []
-      @commands =  {}
-      @actions = []
-      @map = {}
-      @parent = parent
+      @name     = name
+      @options  = []
+      @commands = {}
+      @actions  = []
+      @map      = {}
+      @parent   = parent
+      @trace    = false
     end
 
     # Public: Sets or gets the command version
@@ -133,7 +135,7 @@ module Mercenary
         @logger = Logger.new(STDOUT)
         @logger.level = level || Logger::INFO
         @logger.formatter = proc do |severity, datetime, progname, msg|
-          "#{ident} (#{severity}): #{msg}\n"
+          "#{identity} (#{severity}): #{msg}\n"
         end
       end
 
@@ -189,6 +191,10 @@ module Mercenary
       opts.on("-v", "--version", "Print the version") do
         puts "#{name} #{version}"
         abort
+      end
+
+      opts.on('-t', '--trace', 'Show full backtrace if an error occurs') do
+        @trace = true
       end
 
       opts.on_tail("-h", "--help", "Show this message") do
