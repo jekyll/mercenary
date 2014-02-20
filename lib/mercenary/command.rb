@@ -42,7 +42,12 @@ module Mercenary
     # Returns the syntax string and sets it if an argument is present
     def syntax(syntax = nil)
       @syntax = syntax if syntax
-      @syntax
+      syntax_list = []
+      if parent
+        syntax_list << parent.syntax.to_s.gsub(/<[\w\s-]+>/, '').gsub(/\[[\w\s-]+\]/, '').strip
+      end
+      syntax_list << (@syntax || name.to_s)
+      syntax_list.join(" ")
     end
 
     # Public: Sets or gets the command description
@@ -81,8 +86,9 @@ module Mercenary
     #
     # Returns nothing
     def option(sym, *options)
-      @options << options
-      @map[options[0]] = sym
+      new_option = Option.new(sym, options)
+      @options << new_option
+      @map[new_option.hash] = sym
     end
 
     # Public: Adds a subcommand
@@ -145,6 +151,7 @@ module Mercenary
     def go(argv, opts, config)
       opts.banner = "Usage: #{syntax}"
       process_options(opts, config)
+      add_default_options(opts)
 
       if argv[0] && cmd = commands[argv[0].to_sym]
         logger.debug "Found subcommand '#{cmd.name}'"
@@ -164,10 +171,29 @@ module Mercenary
     #
     # Returns nothing
     def process_options(opts, config)
-      options.each do |o|
-        opts.on(*o) do |x|
-          config[map[o[0]]] = x
+      options.each do |option|
+        opts.on(*option.for_option_parser) do |x|
+          config[map[option.hash]] = x
         end
+      end
+    end
+
+    # Public: Add version and help options to the command
+    #
+    # opts - instance of OptionParser
+    #
+    # Returns nothing
+    def add_default_options(opts)
+      option 'show_help', '-h', '--help', 'Show this message'
+      option 'show_version', '-v', '--version', 'Print the name and version'
+      opts.on("-v", "--version", "Print the version") do
+        puts "#{name} #{version}"
+        abort
+      end
+
+      opts.on_tail("-h", "--help", "Show this message") do
+        puts self
+        exit
       end
     end
 
@@ -199,19 +225,39 @@ module Mercenary
     #
     # Returns a string which identifies this command
     def ident
-      "<Command name=#{name}>"
+      "<Command name=#{identity}>"
+    end
+
+    # Public: Get the full identity (name & version) of this command
+    #
+    # Returns a string containing the name and version if it exists
+    def identity
+      "#{full_name} #{version if version}".strip
+    end
+
+    # Public: Get the name of the current command plus that of
+    #   its parent commands
+    #
+    # Returns the full name of the command
+    def full_name
+      the_name = []
+      the_name << parent.full_name if parent && parent.full_name
+      the_name << name
+      the_name.join(" ")
+    end
+
+    # Public: Build a string containing a summary of the command
+    #
+    # Returns a one-line summary of the command.
+    def summarize
+      "  #{name.to_s.ljust(20)}  #{description}"
     end
 
     # Public: Build a string containing the command name, options and any subcommands
     #
     # Returns the string identifying this command, its options and its subcommands
     def to_s
-      msg = ''
-      msg += "Command: #{name}\n"
-      options.each { |o| msg += "  " + o.inspect + "\n"}
-      msg += "\n"
-      commands.each { |k, v| msg += commands[k].inspect }
-      msg
+      Presenter.new(self).print_command
     end
   end
 end
