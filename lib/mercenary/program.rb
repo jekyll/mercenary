@@ -31,7 +31,16 @@ module Mercenary
 
       logger.debug("Parsed config: #{@config.inspect}")
 
-      cmd.execute(argv, @config)
+      begin
+        cmd.execute(argv, @config)
+      rescue => e
+        if cmd.trace
+          raise e
+        else
+          logger.error e.message
+          abort
+        end
+      end
     end
   end
 end
