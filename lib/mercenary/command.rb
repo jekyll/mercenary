@@ -202,6 +202,13 @@ module Mercenary
       "<Command name=#{name}>"
     end
 
+    # Public: Build a string containing a summary of each command
+    # 
+    # Returns
+    def summarize
+      "#{name.to_s.rjust(20)}  #{description}"
+    end
+
     # Public: Build a string containing the command name, options and any subcommands
     #
     # Returns the string identifying this command, its options and its subcommands
@@ -223,10 +230,9 @@ module Mercenary
       msg << "\n"
       if commands.size > 0
         msg << "Subcommands: \n"
-        commands.each do |_, v|
-          msg << v.to_s.split("\n").map {|l| "  #{l}"}.join("\n")
-          msg << "\n\n"
-        end
+        msg << commands.map do |_, v|
+          "  #{v.summarize}"
+        end.join("\n")
       end
       msg
     end
