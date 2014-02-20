@@ -12,26 +12,7 @@ module Mercenary
 
     def options_presentation
       return nil unless command.options.size > 0
-      command.options.map do |opt|
-        output = []
-        switches = opt.take(opt.size - 1)
-        if switches.size < 2
-          if switches.first.start_with?("--")
-            switches.unshift ""
-          else
-            switches << ""
-          end
-        end
-        output << switches.first.rjust(12)
-        if switches.first.empty?
-          output.first << " "
-        else
-          output.first << ","
-        end
-        output << switches.last.ljust(15)
-        output << opt.last
-        output.join(" ")
-      end.join("\n")
+      command.options.map(&:to_s).join("\n")
     end
 
     def subcommands_presentation
