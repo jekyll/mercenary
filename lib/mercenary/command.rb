@@ -25,6 +25,16 @@ module Mercenary
       @parent = parent
     end
 
+    # Public: Sets or gets the command version
+    #
+    # version - the command version (optional)
+    #
+    # Returns the version and sets it if an argument is non-nil
+    def version(version = nil)
+      @version = version if version
+      @version
+    end
+
     # Public: Sets or gets the syntax string
     #
     # syntax - the string which describes this command's usage syntax (optional)

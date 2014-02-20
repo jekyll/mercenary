@@ -35,6 +35,12 @@ describe(Mercenary::Command) do
       expect(add_sub.call(command).parent).to eq(command)
     end
 
+    it "can set its version" do
+      version = "1.4.2"
+      command.version version
+      expect(command.version).to eq(version)
+    end
+
     it "can set its syntax" do
       syntax_string = "my_name [options]"
       cmd = described_class.new(:my_name)

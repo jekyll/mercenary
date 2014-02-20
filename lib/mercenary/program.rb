@@ -13,16 +13,6 @@ module Mercenary
       super(name)
     end
 
-    # Public: Sets or gets the program version
-    #
-    # version - the program version (optional)
-    #
-    # Returns the version and sets it if an argument is present
-    def version(version = nil)
-      @version = version if version
-      @version
-    end
-
     # Public: Run the program
     #
     # argv - an array of string args (usually ARGV)
