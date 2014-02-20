@@ -24,9 +24,7 @@ module Mercenary
 
     def subcommands_presentation
       return nil unless command.commands.size > 0
-      command.commands.map do |_, subcommand|
-        "  #{subcommand.summarize}"
-      end.join("\n")
+      command.commands.values.map(&:summarize).join("\n")
     end
 
     def command_presentation
