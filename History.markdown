@@ -2,6 +2,16 @@
 
 ### Major Enhancements
 
+### Minor Enhancements
+
+### Bug Fixes
+
+### Development Fixes
+
+## 0.3.0 / 2014-02-20
+
+### Major Enhancements
+
 * Officially drop 1.8.7 support (#14)
 * Allow Commands to set their own versions (#17)
 * Show subcommands, options and usage in help and attach to all commands (#18)
@@ -11,8 +21,6 @@
 ### Minor Enhancements
 
 * Logging state is maintained throughout process (#12)
-
-### Bug Fixes
 
 ### Development Fixes
 
