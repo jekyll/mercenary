@@ -10,7 +10,7 @@ require "mercenary"
 
 Mercenary.program(:logger_output) do |p|
 
-  p.version "#.#.#"
+  p.version "5.2.6"
   p.description 'An example of turning on logging for Mercenary.'
   p.syntax 'logger_output'
 
