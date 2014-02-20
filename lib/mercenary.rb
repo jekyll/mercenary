@@ -6,8 +6,9 @@ require "optparse"
 require "logger"
 
 module Mercenary
-  autoload :Command, "mercenary/command"
-  autoload :Program, "mercenary/program"
+  autoload :Command,   "mercenary/command"
+  autoload :Presenter, "mercenary/presenter"
+  autoload :Program,   "mercenary/program"
 
   # Public: Instantiate a new program and execute.
   #
