@@ -25,6 +25,13 @@ Mercenary.program(:help_dialogue) do |p|
       f.description 'Do amazing things'
       f.option 'blah', '-b', '--blah', 'Trigger blah flag'
       f.option 'heh', '-H ARG', '--heh ARG', 'Give a heh'
+
+      f.action do |args, options|
+        print "Args: "
+        p args
+        print "Opts: "
+        p options
+      end
     end
   end
 
