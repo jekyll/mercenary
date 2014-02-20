@@ -233,7 +233,7 @@ module Mercenary
     #
     # Returns a one-line summary of the command.
     def summarize
-      "#{name.to_s.rjust(20)}  #{description}"
+      "  #{name.to_s.ljust(20)}  #{description}"
     end
 
     # Public: Build a string containing the command name, options and any subcommands
