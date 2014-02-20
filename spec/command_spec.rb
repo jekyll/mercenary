@@ -56,10 +56,11 @@ describe(Mercenary::Command) do
 
     it "can set its options" do
       name = "show_drafts"
-      opt  = ['--drafts', 'Render posts in the _drafts folder']
-      command.option name, *opt
-      expect(command.options).to eq([opt])
-      expect(command.map).to include({opt.first => name})
+      opts  = ['--drafts', 'Render posts in the _drafts folder']
+      option = Mercenary::Option.new(name, opts)
+      command.option name, *opts
+      expect(command.options).to eql([option])
+      expect(command.map).to include({option.hash => name})
     end
 
     it "raises an ArgumentError if I specify a default_command that isn't there" do

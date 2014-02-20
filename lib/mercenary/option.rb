@@ -9,7 +9,7 @@ module Mercenary
     end
 
     def for_option_parser
-      [switches.reject(&:empty?), description].flatten
+      [switches.reject(&:empty?), description].reject{ |o| o.nil? || o.empty? }.flatten
     end
 
     def to_s
@@ -21,6 +21,19 @@ module Mercenary
         switches.first.rjust(12),
         switches.last.ljust(15)
       ].join(", ").gsub(/ , /, '   ')
+    end
+
+    def hash
+      instance_variables.map do |var|
+        instance_variable_get(var).hash
+      end.reduce(:&)
+    end
+
+    def eql?(other)
+      return false unless self.class.eql?(other.class)
+      instance_variables.each do |var|
+        instance_variable_get(var).eql?(other.instance_variable_get(var))
+      end
     end
 
     private
