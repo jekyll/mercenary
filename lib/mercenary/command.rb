@@ -151,8 +151,8 @@ module Mercenary
     # Returns the command to be executed
     def go(argv, opts, config)
       opts.banner = "Usage: #{syntax}"
-      add_default_options(opts)
       process_options(opts, config)
+      add_default_options(opts)
 
       if argv[0] && cmd = commands[argv[0].to_sym]
         logger.debug "Found subcommand '#{cmd.name}'"
@@ -180,6 +180,8 @@ module Mercenary
     end
 
     def add_default_options(opts)
+      option 'show_help', '-h', '--help', 'Show this message'
+      option 'show_version', '-v', '--version', 'Print the name and version'
       opts.on("-v", "--version", "Print the version") do
         puts "#{name} #{version}"
         abort
