@@ -86,8 +86,9 @@ module Mercenary
     #
     # Returns nothing
     def option(sym, *options)
-      @options << options
-      @map[options[0]] = sym
+      new_option = Option.new(sym, options)
+      @options << new_option
+      @map[new_option.hash] = sym
     end
 
     # Public: Adds a subcommand
@@ -170,9 +171,10 @@ module Mercenary
     #
     # Returns nothing
     def process_options(opts, config)
-      options.each do |o|
-        opts.on(*o) do |x|
-          config[map[o[0]]] = x
+      options.each do |option|
+        p option.for_option_parser
+        opts.on(*option.for_option_parser) do |x|
+          config[map[option.hash]] = x
         end
       end
     end

@@ -7,6 +7,7 @@ require "logger"
 
 module Mercenary
   autoload :Command,   "mercenary/command"
+  autoload :Option,    "mercenary/option"
   autoload :Presenter, "mercenary/presenter"
   autoload :Program,   "mercenary/program"
 
