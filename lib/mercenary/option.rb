@@ -31,9 +31,9 @@ module Mercenary
 
     def eql?(other)
       return false unless self.class.eql?(other.class)
-      instance_variables.each do |var|
+      instance_variables.map do |var|
         instance_variable_get(var).eql?(other.instance_variable_get(var))
-      end
+      end.all?
     end
 
     private
