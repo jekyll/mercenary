@@ -4,8 +4,8 @@ module Mercenary
 
     def initialize(config_key, info)
       @config_key = config_key
-      @description = info.last
-      set_switches(info.take(info.size - 1))
+      @description = info.last unless info.last.start_with?("-")
+      set_switches(info.take(info.size - [@description].reject(&:nil?).size))
     end
 
     def for_option_parser

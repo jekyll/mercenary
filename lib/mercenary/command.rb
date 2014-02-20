@@ -172,7 +172,6 @@ module Mercenary
     # Returns nothing
     def process_options(opts, config)
       options.each do |option|
-        p option.for_option_parser
         opts.on(*option.for_option_parser) do |x|
           config[map[option.hash]] = x
         end
