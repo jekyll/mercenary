@@ -115,20 +115,13 @@ module Mercenary
     def logger(level = nil)
       unless @logger
         @logger = Logger.new(STDOUT)
+        @logger.level = level || Logger::INFO
         @logger.formatter = proc do |severity, datetime, progname, msg|
           "#{ident} (#{severity}): #{msg}\n"
         end
-
-        if level == nil
-          @logger.level = Logger::INFO
-        end
-
       end
 
-      unless level.nil? 
-        @logger.level = level
-      end
-
+      @logger.level = level unless level.nil?
       @logger
     end
 
