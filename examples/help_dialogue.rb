@@ -10,13 +10,13 @@ require "mercenary"
 
 Mercenary.program(:help_dialogue) do |p|
 
-  p.version "#.#.#"
+  p.version "2.0.1"
   p.description 'An example of the help dialogue in Mercenary'
-  p.syntax 'ruby help_dialogue.rb'
+  p.syntax 'help_dialogue <subcommand>'
 
   p.command(:some_subcommand) do |c|
     c.version '1.4.2'
-    c.syntax 'some_subcommand [options]'
+    c.syntax 'some_subcommand <subcommand> [options]'
     c.description 'Some subcommand to do something'
     c.option 'an_option', '-o', '--option', 'Some option'
 
@@ -29,7 +29,7 @@ Mercenary.program(:help_dialogue) do |p|
   end
 
   p.command(:another_subcommand) do |c|
-    c.syntax 'another_subcommand [options]'
+    c.syntax 'another_subcommand <subcommand> [options]'
     c.description 'Another subcommand to do something different.'
     c.option 'an_option', '-O', '--option', 'Some option'
     c.option 'another_options', '--pluginzzz', 'Set where the plugins should be found from'
