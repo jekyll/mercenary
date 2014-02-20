@@ -135,7 +135,7 @@ module Mercenary
         @logger = Logger.new(STDOUT)
         @logger.level = level || Logger::INFO
         @logger.formatter = proc do |severity, datetime, progname, msg|
-          "#{identity} (#{severity}): #{msg}\n"
+          "#{identity} | " << "#{severity.downcase.capitalize}:".ljust(7) << " #{msg}\n"
         end
       end
 
