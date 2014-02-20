@@ -206,11 +206,28 @@ module Mercenary
     #
     # Returns the string identifying this command, its options and its subcommands
     def to_s
-      msg = ''
-      msg += "Command: #{name}\n"
-      options.each { |o| msg += "  " + o.inspect + "\n"}
-      msg += "\n"
-      commands.each { |k, v| msg += commands[k].inspect }
+      msg = ""
+      msg << "#{name}"
+      msg << " v#{version}" if version
+      msg << "\n"
+      options.each do |o|
+        pretty_options = if o.size > 2
+          o.take(2).join(", ")
+        else
+          o.first
+        end
+        msg << pretty_options.rjust(15)
+        msg << "  #{o.last}"
+        msg << "\n"
+      end
+      msg << "\n"
+      if commands.size > 0
+        msg << "Subcommands: \n"
+        commands.each do |_, v|
+          msg << v.to_s.split("\n").map {|l| "  #{l}"}.join("\n")
+          msg << "\n\n"
+        end
+      end
       msg
     end
   end

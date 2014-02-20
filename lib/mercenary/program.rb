@@ -30,6 +30,13 @@ module Mercenary
           puts "#{name} #{version}"
           abort
         end
+
+        opts.on_tail("-h", "--help", "Show this message") do
+          #puts opts
+          #puts
+          puts to_s
+          exit
+        end
       end
 
       @optparse.parse!(argv)
