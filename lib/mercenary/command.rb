@@ -216,12 +216,19 @@ module Mercenary
     #
     # Returns a string which identifies this command
     def ident
-      "<Command name=#{name}>"
+      "<Command name=#{identity}>"
     end
 
-    # Public: Build a string containing a summary of each command
+    # Public: Get the full identity (name & version) of this command
     # 
-    # Returns
+    # Returns a string containing the name and version if it exists
+    def identity
+      "#{name} #{version if version}".strip
+    end
+
+    # Public: Build a string containing a summary of the command
+    #
+    # Returns a one-line summary of the command.
     def summarize
       "#{name.to_s.rjust(20)}  #{description}"
     end
@@ -230,28 +237,7 @@ module Mercenary
     #
     # Returns the string identifying this command, its options and its subcommands
     def to_s
-      msg = ""
-      msg << "#{name}"
-      msg << " v#{version}" if version
-      msg << "\n"
-      options.each do |o|
-        pretty_options = if o.size > 2
-          o.take(2).join(", ")
-        else
-          o.first
-        end
-        msg << pretty_options.rjust(15)
-        msg << "  #{o.last}"
-        msg << "\n"
-      end
-      msg << "\n"
-      if commands.size > 0
-        msg << "Subcommands: \n"
-        msg << commands.map do |_, v|
-          "  #{v.summarize}"
-        end.join("\n")
-      end
-      msg
+      Presenter.new(self).print_command
     end
   end
 end
