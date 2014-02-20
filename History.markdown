@@ -11,6 +11,7 @@
 ### Minor Enhancements
 
 * Logging state is maintained throughout process (#12)
+* Tidy up Command#logger output (#21)
 
 ### Bug Fixes
 
