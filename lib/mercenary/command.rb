@@ -42,14 +42,12 @@ module Mercenary
     # Returns the syntax string and sets it if an argument is present
     def syntax(syntax = nil)
       @syntax = syntax if syntax
+      syntax_list = []
       if parent
-        [
-          parent.syntax.to_s.gsub(/<[\w\s-]+>/, '').gsub(/\[[\w\s-]+\]/, '').strip,
-          @syntax
-        ].join(" ")
-      else
-        @syntax
+        syntax_list << parent.syntax.to_s.gsub(/<[\w\s-]+>/, '').gsub(/\[[\w\s-]+\]/, '').strip
       end
+      syntax_list << (@syntax || name.to_s)
+      syntax_list.join(" ")
     end
 
     # Public: Sets or gets the command description
@@ -225,7 +223,7 @@ module Mercenary
     end
 
     # Public: Get the full identity (name & version) of this command
-    # 
+    #
     # Returns a string containing the name and version if it exists
     def identity
       "#{name} #{version if version}".strip
