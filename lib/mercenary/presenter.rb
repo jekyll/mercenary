@@ -18,7 +18,7 @@ module Mercenary
         else
           o.first
         end
-        "#{pretty_options.rjust(15)}  #{o.last}"
+        "#{pretty_options.rjust(20)}  #{o.last}"
       end.join("\n")
     end
 
