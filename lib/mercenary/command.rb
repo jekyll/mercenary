@@ -42,7 +42,11 @@ module Mercenary
     # Returns the syntax string and sets it if an argument is present
     def syntax(syntax = nil)
       @syntax = syntax if syntax
-      @syntax
+      if parent
+        [parent.syntax, @syntax].join(" ")
+      else
+        @syntax
+      end
     end
 
     # Public: Sets or gets the command description
