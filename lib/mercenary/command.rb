@@ -144,6 +144,7 @@ module Mercenary
     # Returns the command to be executed
     def go(argv, opts, config)
       opts.banner = "Usage: #{syntax}"
+      add_default_options(opts)
       process_options(opts, config)
 
       if argv[0] && cmd = commands[argv[0].to_sym]
@@ -168,6 +169,18 @@ module Mercenary
         opts.on(*o) do |x|
           config[map[o[0]]] = x
         end
+      end
+    end
+
+    def add_default_options(opts)
+      opts.on("-v", "--version", "Print the version") do
+        puts "#{name} #{version}"
+        abort
+      end
+
+      opts.on_tail("-h", "--help", "Show this message") do
+        puts self
+        exit
       end
     end
 
