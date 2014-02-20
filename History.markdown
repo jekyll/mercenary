@@ -3,6 +3,7 @@
 ### Major Enhancements
 
 * Officially drop 1.8.7 support (#14)
+* Allow Commands to set their own versions (#17)
 
 ### Minor Enhancements
 
