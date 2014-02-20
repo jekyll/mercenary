@@ -20,9 +20,16 @@ module Mercenary
       command.commands.values.map(&:summarize).join("\n")
     end
 
+    def command_header
+      header = "#{command.identity}"
+      header << " -- #{command.description}" if command.description
+      header
+    end
+
     def command_presentation
       msg = []
-      msg << command.identity
+      msg << command_header
+      msg << "Usage:"
       msg << usage_presentation
 
       if opts = options_presentation
