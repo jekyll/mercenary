@@ -14,3 +14,4 @@ run help_dialogue.rb -h
 run help_dialogue.rb some_subcommand -h
 run help_dialogue.rb another_subcommand -h
 run help_dialogue.rb some_subcommand yet_another_sub -h
+run help_dialogue.rb some_subcommand yet_another_sub -b
