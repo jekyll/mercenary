@@ -178,6 +178,11 @@ module Mercenary
       end
     end
 
+    # Public: Add version and help options to the command
+    #
+    # opts - instance of OptionParser
+    #
+    # Returns nothing
     def add_default_options(opts)
       option 'show_help', '-h', '--help', 'Show this message'
       option 'show_version', '-v', '--version', 'Print the name and version'
@@ -227,7 +232,18 @@ module Mercenary
     #
     # Returns a string containing the name and version if it exists
     def identity
-      "#{name} #{version if version}".strip
+      "#{full_name} #{version if version}".strip
+    end
+
+    # Public: Get the name of the current command plus that of
+    #   its parent commands
+    #
+    # Returns the full name of the command
+    def full_name
+      the_name = []
+      the_name << parent.full_name if parent && parent.full_name
+      the_name << name
+      the_name.join(" ")
     end
 
     # Public: Build a string containing a summary of the command

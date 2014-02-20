@@ -63,6 +63,15 @@ describe(Mercenary::Command) do
       expect(command.map).to include({option.hash => name})
     end
 
+    it "knows its full name" do
+      expect(command_with_parent.full_name).to eql("my_parent i_have_parent")
+    end
+
+    it "knows its identity" do
+      command_with_parent.version '1.8.7'
+      expect(command_with_parent.identity).to eql("my_parent i_have_parent 1.8.7")
+    end
+
     it "raises an ArgumentError if I specify a default_command that isn't there" do
       c = command # some weird NameError with the block below?
       expect { c.default_command(:nope) }.to raise_error(ArgumentError)
