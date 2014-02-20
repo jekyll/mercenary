@@ -18,9 +18,9 @@ module Mercenary
 
     def formatted_switches
       [
-        switches.first.rjust(12),
-        switches.last.ljust(15)
       ].join(", ").gsub(/ , /, '   ')
+        switches.first.rjust(10),
+        switches.last.ljust(13)
     end
 
     def hash
