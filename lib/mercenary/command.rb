@@ -188,6 +188,7 @@ module Mercenary
     def add_default_options(opts)
       option 'show_help', '-h', '--help', 'Show this message'
       option 'show_version', '-v', '--version', 'Print the name and version'
+      option 'show_backtrace', '-t', '--trace', 'Show the full backtrace when an error occurs'
       opts.on("-v", "--version", "Print the version") do
         puts "#{name} #{version}"
         abort
