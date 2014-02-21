@@ -6,6 +6,9 @@
 
 ### Bug Fixes
 
+* `Mercenary::Option` now accepts return values in the form of Class constants
+  (#22)
+
 ### Development Fixes
 
 ## 0.3.0 / 2014-02-20
