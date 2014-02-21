@@ -22,22 +22,26 @@ Or install it yourself as:
 
 ## Usage
 
+Creating programs and commands with Mercenary is easy:
+
 ```ruby
 Mercenary.program(:jekyll) do |p|
   p.version Jekyll::VERSION
   p.description 'Jekyll is a blog-aware, static site generator in Ruby'
+  p.syntax "jekyll <subcommand> [options]"
 
   p.command(:new) do |c|
-    c.syntax "jekyll new PATH"
+    c.syntax "new PATH" # do not include the program name or super commands
     c.description "Creates a new Jekyll site scaffold in PATH"
+    c.option 'blank', '--blank', 'Initialize the new site without any content."
 
     c.action do |args, options|
-      Jekyll::Commands::New.process(args)
+      Jekyll::Commands::New.process(args, blank: options['blank'])
     end
   end
 
   p.command(:build) do |c|
-    c.syntax "jekyll build [options]"
+    c.syntax "build [options]"
     c.description "Builds your Jekyll site"
 
     c.option 'safe', '--safe', 'Run in safe mode'
@@ -49,27 +53,22 @@ Mercenary.program(:jekyll) do |p|
     end
   end
 
-  p.command(:import) do |c|
-    c.syntax "jekyll import <platform> [options]"
-    c.description "Import your old blog to Jekyll"
-
-    c.action do |args, options|
-      begin
-        require "jekyll-import"
-      rescue
-        msg  = "You must install the 'jekyll-import' gem before continuing.\n"
-        msg += "* Do this by running `gem install jekyll-import`.\n"
-        msg += "* Or if you need root privileges, run `sudo gem install jekyll-import`."
-        abort msg
-      end
-
-      Jekyll::Commands::Import.process(args.first, options)
-    end
+  # Bring in command bundled in external gem
+  begin
+    require "jekyll-import"
+    JekyllImport.init_with_program(p)
+  rescue LoadError
   end
 
   p.default_command(:build)
 end
 ```
+
+All commands have the following default options:
+
+- `-h/--help` - show a help message
+- `-v/--version` - show the program version
+- `-t/--trace` - show the full backtrace when an error occurs
 
 ## Contributing
 
