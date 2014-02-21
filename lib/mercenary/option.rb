@@ -1,24 +1,40 @@
 module Mercenary
   class Option
-    attr_reader :config_key, :description, :switches
+    attr_reader :config_key, :description, :short, :long, :return_type
 
     # Public: Create a new Option
     #
-    # config_key - the key in the config hash to which the value of this option will map
-    # info       - an array containing first the switches, then a description of the option
+    # config_key - the key in the config hash to which the value of this option
+    #              will map
+    # info       - an array containing first the switches, then an optional
+    #              return type (e.g. Array), then a description of the option
     #
     # Returns nothing
     def initialize(config_key, info)
-      @config_key = config_key
-      @description = info.last unless info.last.start_with?("-")
-      set_switches(info.take(info.size - [@description].reject(&:nil?).size))
+      @config_key  = config_key
+      while arg = info.shift
+        begin
+          @return_type = Object.const_get("#{arg}")
+          next
+        rescue NameError
+        end
+        if arg.start_with?("-")
+          if arg.start_with?("--")
+            @long = arg
+          else
+            @short = arg
+          end
+          next
+        end
+        @description = arg
+      end
     end
 
     # Public: Fetch the array containing the info OptionParser is interested in
     #
     # Returns the array which OptionParser#on wants
     def for_option_parser
-      [switches.reject(&:empty?), description].reject{ |o| o.nil? || o.empty? }.flatten
+      [short, long, return_type, description].flatten.reject{ |o| o.to_s.empty? }
     end
 
     # Public: Build a string representation of this option including the
@@ -59,21 +75,12 @@ module Mercenary
       end.all?
     end
 
-    private
-
-    # Private: Set the full switches array, ensuring the first element is the
-    #   short switch and the second element is the long switch
+    # Public: Fetch an array of switches, including the short and long versions
     #
-    # Returns the corrected switches array
-    def set_switches(switches)
-      if switches.size < 2
-        if switches.first.start_with?("--")
-          switches.unshift ""
-        else
-          switches << ""
-        end
-      end
-      @switches = switches
+    # Returns an array of two strings. An empty string represents no switch in
+    # that position.
+    def switches
+      [short, long].map(&:to_s)
     end
 
   end
