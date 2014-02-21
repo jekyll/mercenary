@@ -60,7 +60,7 @@ describe(Mercenary::Command) do
       option = Mercenary::Option.new(name, opts)
       command.option name, *opts
       expect(command.options).to eql([option])
-      expect(command.map).to include({option.hash => name})
+      expect(command.map.values).to include(name)
     end
 
     it "knows its full name" do
