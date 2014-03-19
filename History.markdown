@@ -6,6 +6,9 @@
 
 ### Bug Fixes
 
+* Remove duplicate commands from help output; show aliases w/command names
+  (#29)
+
 ### Development Fixes
 
 ## 0.3.1 / 2014-02-21
