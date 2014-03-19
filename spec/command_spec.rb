@@ -80,6 +80,19 @@ describe(Mercenary::Command) do
     it "sets the default_command" do
       expect(with_sub.default_command(:sub_command).name).to eq(:sub_command)
     end
+
+    context "with an alias" do
+      before(:each) do
+        command_with_parent.alias(:an_alias)
+      end
+      it "shows the alias in the summary" do
+        expect(command_with_parent.summarize).to eql("  i_have_parent, an_alias  ")
+      end
+
+      it "its names_and_aliases method reports both the name and alias" do
+        expect(command_with_parent.names_and_aliases).to eql("i_have_parent, an_alias")
+      end
+    end
   end
 
 end
