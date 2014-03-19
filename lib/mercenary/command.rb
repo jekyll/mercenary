@@ -9,6 +9,7 @@ module Mercenary
     attr_reader :map
     attr_accessor :parent
     attr_reader :trace
+    attr_reader :aliases
 
     # Public: Creates a new Command
     #
@@ -25,6 +26,7 @@ module Mercenary
       @map      = {}
       @parent   = parent
       @trace    = false
+      @aliases  = []
     end
 
     # Public: Sets or gets the command version
@@ -113,6 +115,7 @@ module Mercenary
     # Returns nothing
     def alias(cmd_name)
       logger.debug "adding alias to parent for self: '#{cmd_name}'"
+      aliases << cmd_name
       @parent.commands[cmd_name] = self
     end
 
@@ -253,11 +256,18 @@ module Mercenary
       the_name.join(" ")
     end
 
+    # Public: Return all the names and aliases for this command.
+    #
+    # Returns a comma-separated String list of the name followed by its aliases
+    def names_and_aliases
+      ([name.to_s] + aliases).compact.join(", ")
+    end
+
     # Public: Build a string containing a summary of the command
     #
     # Returns a one-line summary of the command.
     def summarize
-      "  #{name.to_s.ljust(20)}  #{description}"
+      "  #{names_and_aliases.ljust(20)}  #{description}"
     end
 
     # Public: Build a string containing the command name, options and any subcommands

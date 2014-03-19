@@ -10,6 +10,7 @@ describe(Mercenary::Presenter) do
     command.description 'Do all the things.'
     command.option 'one', '-1', '--one', 'The first option'
     command.option 'two', '-2', '--two', 'The second option'
+    command.alias :cmd
     supercommand.commands[command.name] = command
   end
 
@@ -17,8 +18,8 @@ describe(Mercenary::Presenter) do
     expect(presenter.command_presentation).to eql("script_name subcommand 1.4.2 -- Do all the things.\n\nUsage:\n\n  script_name subcommand\n\nOptions:\n        -1, --one          The first option\n        -2, --two          The second option")
   end
 
-  it "knows how to present the subcommands" do
-    expect(described_class.new(supercommand).subcommands_presentation).to eql("  subcommand            Do all the things.")
+  it "knows how to present the subcommands, without duplicates for aliases" do
+    expect(described_class.new(supercommand).subcommands_presentation).to eql("  subcommand, cmd       Do all the things.")
   end
 
   it "knows how to present the usage" do

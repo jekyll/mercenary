@@ -19,6 +19,7 @@ Mercenary.program(:help_dialogue) do |p|
     c.syntax 'some_subcommand <subcommand> [options]'
     c.description 'Some subcommand to do something'
     c.option 'an_option', '-o', '--option', 'Some option'
+    c.alias(:blah)
 
     c.command(:yet_another_sub) do |f|
       f.syntax 'yet_another_sub [options]'
