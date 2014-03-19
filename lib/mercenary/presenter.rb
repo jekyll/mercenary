@@ -31,7 +31,7 @@ module Mercenary
     # Returns the string representation of the subcommands
     def subcommands_presentation
       return nil unless command.commands.size > 0
-      command.commands.values.map(&:summarize).join("\n")
+      command.commands.values.uniq.map(&:summarize).join("\n")
     end
 
     # Public: Builds the command header, including the command identity and description
