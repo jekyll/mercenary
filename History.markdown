@@ -6,6 +6,8 @@
 
 ### Bug Fixes
 
+* The `--version` flag should not exit with code 1, but instead code 0. (#33)
+
 ### Development Fixes
 
 ## 0.3.2 / 2014-03-18
