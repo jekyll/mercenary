@@ -10,6 +10,7 @@ function run () {
 }
 
 run logging.rb
+run logging.rb -v
 run help_dialogue.rb -h
 run help_dialogue.rb some_subcommand -h
 run help_dialogue.rb another_subcommand -h

@@ -194,7 +194,7 @@ module Mercenary
       option 'show_backtrace', '-t', '--trace', 'Show the full backtrace when an error occurs'
       opts.on("-v", "--version", "Print the version") do
         puts "#{name} #{version}"
-        abort
+        exit(0)
       end
 
       opts.on('-t', '--trace', 'Show full backtrace if an error occurs') do
