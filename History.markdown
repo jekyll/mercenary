@@ -6,6 +6,8 @@
 
 ### Bug Fixes
 
+* Use option object as key in the command's `@map` hash (#35)
+
 ### Development Fixes
 
 ## 0.3.3 / 2014-05-07
