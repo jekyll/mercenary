@@ -61,7 +61,7 @@ module Mercenary
     def hash
       instance_variables.map do |var|
         instance_variable_get(var).hash
-      end.reduce(:&)
+      end.reduce(:^)
     end
 
     # Public: Check equivalence of two Options based on equivalence of their
