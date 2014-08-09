@@ -6,6 +6,8 @@
 
 ### Bug Fixes
 
+  * Capture `OptionsParser::InvalidOption` and show a nice error message (#38)
+
 ### Development Fixes
 
 ## 0.3.4 / 2014-07-11
