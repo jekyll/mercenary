@@ -27,7 +27,14 @@ module Mercenary
         cmd = super(argv, opts, @config)
       end
 
-      @optparse.parse!(argv)
+      begin
+        @optparse.parse!(argv)
+      rescue OptionParser::InvalidOption => e
+        logger.error "Whoops, we can't understand your command."
+        logger.error "#{e.message}"
+        logger.error "Run your command again with the --help switch to see available options."
+        abort
+      end
 
       logger.debug("Parsed config: #{@config.inspect}")
 
