@@ -1,0 +1,368 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Mercenary by jekyll</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Mercenary</h1>
+        <p>An easier way to build your command-line scripts in Ruby.</p>
+        <p class="view"><a href="https://github.com/jekyll/mercenary">View the Project on GitHub <small>jekyll/mercenary</small></a></p>
+        <ul>
+          <li><a href="https://github.com/jekyll/mercenary/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/jekyll/mercenary/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/jekyll/mercenary">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="mercenary" class="anchor" href="#mercenary"><span class="octicon octicon-link"></span></a>Mercenary</h1>
+
+<p>Lightweight and flexible library for writing command-line apps in Ruby.</p>
+
+<p><a href="https://travis-ci.org/jekyll/mercenary"><img src="https://secure.travis-ci.org/jekyll/mercenary.png" alt="Build Status"></a></p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>Add this line to your application's Gemfile:</p>
+
+<pre><code>gem 'mercenary'
+</code></pre>
+
+<p>And then execute:</p>
+
+<pre><code>$ bundle
+</code></pre>
+
+<p>Or install it yourself as:</p>
+
+<pre><code>$ gem install mercenary
+</code></pre>
+
+<p><strong>Note: Mercenary may not work with Ruby &lt; 1.9.3.</strong></p>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<p>Creating programs and commands with Mercenary is easy:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="no">Mercenary</span><span class="o">.</span><span class="n">program</span><span class="p">(</span><span class="ss">:jekyll</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="nb">p</span><span class="o">|</span>
+  <span class="nb">p</span><span class="o">.</span><span class="n">version</span> <span class="no">Jekyll</span><span class="o">::</span><span class="no">VERSION</span>
+  <span class="nb">p</span><span class="o">.</span><span class="n">description</span> <span class="s1">'Jekyll is a blog-aware, static site generator in Ruby'</span>
+  <span class="nb">p</span><span class="o">.</span><span class="n">syntax</span> <span class="s2">"jekyll &lt;subcommand&gt; [options]"</span>
+
+  <span class="nb">p</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="ss">:new</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">syntax</span> <span class="s2">"new PATH"</span> <span class="c1"># do not include the program name or super commands</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">description</span> <span class="s2">"Creates a new Jekyll site scaffold in PATH"</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">option</span> <span class="s1">'blank'</span><span class="p">,</span> <span class="s1">'--blank'</span><span class="p">,</span> <span class="s1">'Initialize the new site without any content.'</span>
+
+    <span class="n">c</span><span class="o">.</span><span class="n">action</span> <span class="k">do</span> <span class="o">|</span><span class="n">args</span><span class="p">,</span> <span class="n">options</span><span class="o">|</span>
+      <span class="no">Jekyll</span><span class="o">::</span><span class="no">Commands</span><span class="o">::</span><span class="no">New</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="ss">blank</span><span class="p">:</span> <span class="n">options</span><span class="o">[</span><span class="s1">'blank'</span><span class="o">]</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="nb">p</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="ss">:build</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">c</span><span class="o">|</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">syntax</span> <span class="s2">"build [options]"</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">description</span> <span class="s2">"Builds your Jekyll site"</span>
+
+    <span class="n">c</span><span class="o">.</span><span class="n">option</span> <span class="s1">'safe'</span><span class="p">,</span> <span class="s1">'--safe'</span><span class="p">,</span> <span class="s1">'Run in safe mode'</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">option</span> <span class="s1">'source'</span><span class="p">,</span> <span class="s1">'--source DIR'</span><span class="p">,</span> <span class="s1">'From where to collect the source files'</span>
+    <span class="n">c</span><span class="o">.</span><span class="n">option</span> <span class="s1">'destination'</span><span class="p">,</span> <span class="s1">'--dest DIR'</span><span class="p">,</span> <span class="s1">'To where the compiled files should be written'</span>
+
+    <span class="n">c</span><span class="o">.</span><span class="n">action</span> <span class="k">do</span> <span class="o">|</span><span class="n">_</span><span class="p">,</span> <span class="n">options</span><span class="o">|</span>
+      <span class="no">Jekyll</span><span class="o">::</span><span class="no">Commands</span><span class="o">::</span><span class="no">Build</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+
+  <span class="c1"># Bring in command bundled in external gem</span>
+  <span class="k">begin</span>
+    <span class="nb">require</span> <span class="s2">"jekyll-import"</span>
+    <span class="no">JekyllImport</span><span class="o">.</span><span class="n">init_with_program</span><span class="p">(</span><span class="nb">p</span><span class="p">)</span>
+  <span class="k">rescue</span> <span class="no">LoadError</span>
+  <span class="k">end</span>
+
+  <span class="nb">p</span><span class="o">.</span><span class="n">default_command</span><span class="p">(</span><span class="ss">:build</span><span class="p">)</span>
+<span class="k">end</span>
+</pre></div>
+
+<p>All commands have the following default options:</p>
+
+<ul>
+<li>
+<code>-h/--help</code> - show a help message</li>
+<li>
+<code>-v/--version</code> - show the program version</li>
+<li>
+<code>-t/--trace</code> - show the full backtrace when an error occurs</li>
+</ul>
+
+<h2>
+<a name="api" class="anchor" href="#api"><span class="octicon octicon-link"></span></a>API</h2>
+
+<h3>
+<a name="mercenary-1" class="anchor" href="#mercenary-1"><span class="octicon octicon-link"></span></a><code>Mercenary</code>
+</h3>
+
+<h4>
+<a name="program" class="anchor" href="#program"><span class="octicon octicon-link"></span></a><code>.program</code>
+</h4>
+
+<p>Creates and executes a program. Accepts two arguments:</p>
+
+<ul>
+<li>
+<code>name</code> - program name as a Symbol</li>
+<li>
+<code>block</code> - the specification for the program, passed the program instance as an
+argument.</li>
+</ul>
+
+<p>Example is above, under the heading <a href="#usage">Usage</a>.</p>
+
+<h3>
+<a name="program-1" class="anchor" href="#program-1"><span class="octicon octicon-link"></span></a><code>Program</code>
+</h3>
+
+<p><code>Program</code> is a subclass of <code>Command</code>, so it has all of the methods documented
+below as well as those for <code>Command</code>.</p>
+
+<h4>
+<a name="config" class="anchor" href="#config"><span class="octicon octicon-link"></span></a><code>#config</code>
+</h4>
+
+<p>Fetches the program configuration hash.</p>
+
+<h3>
+<a name="command" class="anchor" href="#command"><span class="octicon octicon-link"></span></a><code>Command</code>
+</h3>
+
+<h4>
+<a name="new" class="anchor" href="#new"><span class="octicon octicon-link"></span></a><code>#new</code>
+</h4>
+
+<p>Create a new command. Accepts two arguments:</p>
+
+<ul>
+<li>
+<code>name</code> - the name of your command, as a symbol</li>
+<li>
+<code>parent</code> - (optional) the parent Command</li>
+</ul>
+
+<h4>
+<a name="version" class="anchor" href="#version"><span class="octicon octicon-link"></span></a><code>#version</code>
+</h4>
+
+<p>Sets or gets the version of the command. Accepts an optional argument:</p>
+
+<ul>
+<li>
+<code>version</code> - (optional) the version to set for the command. If present, this
+becomes the new version for the command and persists.</li>
+</ul>
+
+<h4>
+<a name="syntax" class="anchor" href="#syntax"><span class="octicon octicon-link"></span></a><code>#syntax</code>
+</h4>
+
+<p>Sets or gets the syntax of the command. Built on parent syntaxes if a parent
+exists. Accepts one optional argument:</p>
+
+<ul>
+<li>
+<code>syntax</code> - (optional) the syntax to set for the command. Will inherit from the
+parent commands or program. Usually in the form of
+<code>"command_name &lt;SUBCOMMAND&gt; [OPTIONS]"</code>
+</li>
+</ul>
+
+<p>When a parent command exists, say <code>supercommand</code>, with syntax set as
+<code>supercommand &lt;SUBCOMMAND&gt; [OPTIONS]</code>, the syntax of the command in question
+will be <code>supercommand command_name &lt;SUBCOMMAND&gt; [OPTIONS]</code> with both
+<code>&lt;SUBCOMMAND&gt;</code> and <code>[OPTIONS]</code> stripped out. Any text between <code>&lt;</code> and <code>&gt;</code> or
+between <code>[</code> and <code>]</code> will be stripped from parent command syntaxes. The purpose
+of this chaining is to reduce redundancy.</p>
+
+<h4>
+<a name="description" class="anchor" href="#description"><span class="octicon octicon-link"></span></a><code>#description</code>
+</h4>
+
+<p>Sets or gets the description of the command. Accepts one optional argument:</p>
+
+<ul>
+<li>
+<code>desc</code> - (optional) the description to set for the command. If
+provided, will override any previous description set for the command.</li>
+</ul>
+
+<h4>
+<a name="default_command" class="anchor" href="#default_command"><span class="octicon octicon-link"></span></a><code>#default_command</code>
+</h4>
+
+<p>Sets or gets the default subcommand of the command to execute in the event no
+subcommand is passed during execution. Accepts one optional argument:</p>
+
+<ul>
+<li>
+<code>command_name</code> - (optional) the <code>Symbol</code> name of the subcommand to be
+executed. Raises an <code>ArgumentError</code> if the subcommand doesn't exist.
+Overwrites previously-set default commands.</li>
+</ul>
+
+<h4>
+<a name="option" class="anchor" href="#option"><span class="octicon octicon-link"></span></a><code>#option</code>
+</h4>
+
+<p>Adds a new option to the command. Accepts many arguments:</p>
+
+<ul>
+<li>
+<code>config_key</code> - the configuration key that the value of this option maps to.</li>
+<li>
+<code>*options</code> - all the options, globbed, to be passed to <code>OptionParser</code>, namely the
+switches and the option description. Usually in the format
+<code>"-s", "--switch", "Sets the 'switch' flag"</code>.</li>
+</ul>
+
+<p>Valid option calls:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="n">cmd</span><span class="o">.</span><span class="n">option</span> <span class="s1">'config_key'</span><span class="p">,</span> <span class="s1">'-c'</span><span class="p">,</span> <span class="s1">'Sets the "config" flag'</span>
+<span class="n">cmd</span><span class="o">.</span><span class="n">option</span> <span class="s1">'config_key'</span><span class="p">,</span> <span class="s1">'--config'</span><span class="p">,</span> <span class="s1">'Sets the "config" flag'</span>
+<span class="n">cmd</span><span class="o">.</span><span class="n">option</span> <span class="s1">'config_key'</span><span class="p">,</span> <span class="s1">'-c'</span><span class="p">,</span> <span class="s1">'--config'</span><span class="p">,</span> <span class="s1">'Sets the "config" flag.'</span>
+<span class="n">cmd</span><span class="o">.</span><span class="n">option</span> <span class="s1">'config_key'</span><span class="p">,</span> <span class="s1">'-c FILE'</span><span class="p">,</span> <span class="s1">'--config FILE'</span><span class="p">,</span> <span class="s1">'The config file.'</span>
+<span class="n">cmd</span><span class="o">.</span><span class="n">option</span> <span class="s1">'config_key'</span><span class="p">,</span> <span class="s1">'-c FILE1[,FILE2[,FILE3...]]'</span><span class="p">,</span> <span class="s1">'--config FILE1[,FILE2[,FILE3...]]'</span><span class="p">,</span> <span class="nb">Array</span><span class="p">,</span> <span class="s1">'The config files.'</span>
+</pre></div>
+
+<p>Notice that you can specify either a short switch, a long switch, or both. If
+you want to accept an argument, you have to specify it in the switch strings.
+The class of the argument defaults to <code>String</code>, but you can optionally set a
+different class to create, e.g. <code>Array</code>, if you are expecting a particular class
+in your code from this option's value. The description is also optional, but
+it's highly recommended to include a description.</p>
+
+<h4>
+<a name="alias" class="anchor" href="#alias"><span class="octicon octicon-link"></span></a><code>#alias</code>
+</h4>
+
+<p>Specifies an alias for this command such that the alias may be used in place of
+the command during execution. Accepts one argument:</p>
+
+<ul>
+<li>
+<code>cmd_name</code> - the alias name for this command as a <code>Symbol</code>
+</li>
+</ul>
+
+<p>Example:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="n">cmd</span><span class="o">.</span><span class="n">alias</span><span class="p">(</span><span class="ss">:my_alias</span><span class="p">)</span>
+<span class="c1"># Now `cmd` is now also executable via "my_alias"</span>
+</pre></div>
+
+<h4>
+<a name="action" class="anchor" href="#action"><span class="octicon octicon-link"></span></a><code>#action</code>
+</h4>
+
+<p>Specifies a block to be executed in the event the command is specified at
+runtime. The block is given two arguments:</p>
+
+<ul>
+<li>
+<code>args</code> - the non-switch arguments given from the command-line</li>
+<li>
+<code>options</code> - the options hash built via the switches passed</li>
+</ul>
+
+<p><strong>Note that actions are additive</strong>, meaning any new call to <code>#action</code> will
+result in another action to be executed at runtime. Actions will be executed in
+the order they are specified in.</p>
+
+<p>Example:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="n">cmd</span><span class="o">.</span><span class="n">action</span> <span class="k">do</span> <span class="o">|</span><span class="n">args</span><span class="p">,</span> <span class="n">options</span><span class="o">|</span>
+  <span class="c1"># do something!</span>
+<span class="k">end</span>
+</pre></div>
+
+<h4>
+<a name="logger" class="anchor" href="#logger"><span class="octicon octicon-link"></span></a><code>#logger</code>
+</h4>
+
+<p>Access the logger for this command. Useful for outputting information to STDOUT.
+Accepts one optional argument:</p>
+
+<ul>
+<li>
+<code>level</code> - (optional) the severity threshold at which to begin logging. Uses
+Ruby's built-in
+<a href="http://www.ruby-doc.org/stdlib-2.1.0/libdoc/logger/rdoc/Logger.html"><code>Logger</code></a>
+levels.</li>
+</ul>
+
+<p>Log level defaults to <code>Logger::INFO</code>.</p>
+
+<p>Examples:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="n">cmd</span><span class="o">.</span><span class="n">logger</span><span class="p">(</span><span class="no">Logger</span><span class="o">::</span><span class="no">DEBUG</span><span class="p">)</span>
+<span class="n">cmd</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span> <span class="s2">"My debug message."</span>
+<span class="n">cmd</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span> <span class="s2">"My informative message."</span>
+<span class="n">cmd</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">warn</span> <span class="s2">"ACHTUNG!!"</span>
+<span class="n">cmd</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span> <span class="s2">"Something terrible has happened."</span>
+<span class="n">cmd</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">fatal</span> <span class="s2">"I can't continue doing what I'm doing."</span>
+</pre></div>
+
+<h4>
+<a name="command-1" class="anchor" href="#command-1"><span class="octicon octicon-link"></span></a><code>#command</code>
+</h4>
+
+<p>Creates a new subcommand for the current command. Accepts two arguments:</p>
+
+<ul>
+<li>
+<code>cmd_name</code> - the command name, as a Symbol</li>
+<li>
+<code>block</code> -  the specification of the subcommand in a block</li>
+</ul>
+
+<p>Example:</p>
+
+<div class="highlight highlight-ruby"><pre><span class="n">my_command</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="ss">:my_subcommand</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">subcmd</span><span class="o">|</span>
+  <span class="n">subcmd</span><span class="o">.</span><span class="n">description</span> <span class="s1">'My subcommand'</span>
+  <span class="n">subcmd</span><span class="o">.</span><span class="n">syntax</span> <span class="s1">'my_subcommand [OPTIONS]'</span>
+  <span class="c1"># ...</span>
+<span class="k">end</span>
+</pre></div>
+
+<h2>
+<a name="contributing" class="anchor" href="#contributing"><span class="octicon octicon-link"></span></a>Contributing</h2>
+
+<ol>
+<li>Fork it</li>
+<li>Create your feature branch (<code>git checkout -b my-new-feature</code>)</li>
+<li>Commit your changes (<code>git commit -am 'Add some feature'</code>)</li>
+<li>Push to the branch (<code>git push origin my-new-feature</code>)</li>
+<li>Create new Pull Request</li>
+</ol>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/jekyll">jekyll</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
