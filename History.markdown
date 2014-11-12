@@ -11,6 +11,8 @@
 
 ### Development Fixes
 
+  * Bump to RSpec 3 (#40)
+
 ## 0.3.4 / 2014-07-11
 
 ### Bug Fixes
