@@ -72,7 +72,7 @@ describe(Mercenary::Option) do
     let(:description) { nil }
 
     it "knows there is no description" do
-      expect(option.description).to be_nil
+      expect(option.description).to be(nil)
     end
 
     it "knows both inputs are switches" do
