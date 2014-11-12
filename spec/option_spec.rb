@@ -28,8 +28,8 @@ describe(Mercenary::Option) do
 
   it "compares itself with other options well" do
     new_option = described_class.new(config_key, ['-l', '--largo', description])
-    expect(option.eql?(new_option)).to be_true
-    expect(option.hash.eql?(new_option.hash)).to be_true
+    expect(option.eql?(new_option)).to be(true)
+    expect(option.hash.eql?(new_option.hash)).to be(true)
   end
 
   it "has a custom #hash" do
