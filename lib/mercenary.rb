@@ -1,14 +1,12 @@
-lib = File.expand_path('../', __FILE__)
-
-require "#{lib}/mercenary/version"
+require File.expand_path("../mercenary/version", __FILE__)
 require "optparse"
 require "logger"
 
 module Mercenary
-  autoload :Command,   "#{lib}/mercenary/command"
-  autoload :Option,    "#{lib}/mercenary/option"
-  autoload :Presenter, "#{lib}/mercenary/presenter"
-  autoload :Program,   "#{lib}/mercenary/program"
+  autoload :Command,   File.expand_path("../mercenary/command", __FILE__)
+  autoload :Option,    File.expand_path("../mercenary/option", __FILE__)
+  autoload :Presenter, File.expand_path("../mercenary/presenter", __FILE__)
+  autoload :Program,   File.expand_path("../mercenary/program", __FILE__)
 
   # Public: Instantiate a new program and execute.
   #
