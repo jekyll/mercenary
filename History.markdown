@@ -7,6 +7,7 @@
 ### Bug Fixes
 
   * Capture `OptionsParser::InvalidOption` and show a nice error message (#38)
+  * Absolute paths for requires and autoloads (#39)
 
 ### Development Fixes
 
