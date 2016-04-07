@@ -22,8 +22,22 @@ module Mercenary
     #
     # Returns the string representation of the options
     def options_presentation
+      return nil unless command_options_presentation || parent_command_options_presentation
+      [command_options_presentation, parent_command_options_presentation].compact.join("\n")
+    end
+
+    def command_options_presentation
       return nil unless command.options.size > 0
       command.options.map(&:to_s).join("\n")
+    end
+
+    # Public: Builds a string representation of the options for parent
+    # commands
+    #
+    # Returns the string representation of the options for parent commands
+    def parent_command_options_presentation
+      return nil unless command.parent
+      Presenter.new(command.parent).options_presentation
     end
 
     # Public: Builds a string representation of the subcommands
