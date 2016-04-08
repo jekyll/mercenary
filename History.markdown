@@ -1,4 +1,6 @@
-## HEAD
+## 0.3.6 / 2016-04-07
+
+### Bug Fixes
 
   * Presenter: Options should include those from parent command (#42)
 
