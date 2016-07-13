@@ -162,6 +162,9 @@ module Mercenary
         logger.debug "Found subcommand '#{cmd.name}'"
         argv.shift
         cmd.go(argv, opts, config)
+      elsif !(argv[0] =~ /^\-/).nil? && @default_command
+        logger.debug "Default command found.'"
+        @default_command.go(argv, opts, config)
       else
         logger.debug "No additional command found, time to exec"
         self
