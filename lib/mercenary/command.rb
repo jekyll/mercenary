@@ -215,7 +215,7 @@ module Mercenary
     # Returns nothing
     def execute(argv = [], config = {})
       if actions.empty? && !default_command.nil?
-        default_command.execute
+        default_command.execute(argv, config)
       else
         actions.each { |a| a.call(argv, config) }
       end
