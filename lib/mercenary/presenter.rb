@@ -23,7 +23,7 @@ module Mercenary
     # Returns the string representation of the options
     def options_presentation
       return nil unless command_options_presentation || parent_command_options_presentation
-      [command_options_presentation, parent_command_options_presentation].compact.join("\n")
+      [command_options_presentation, parent_command_options_presentation].join("\n\n").rstrip
     end
 
     def command_options_presentation
@@ -37,7 +37,7 @@ module Mercenary
     # Returns the string representation of the options for parent commands
     def parent_command_options_presentation
       return nil unless command.parent
-      Presenter.new(command.parent).options_presentation
+      Presenter.new(command.parent).command_options_presentation
     end
 
     # Public: Builds a string representation of the subcommands
@@ -52,7 +52,7 @@ module Mercenary
     #
     # Returns the command header as a String
     def command_header
-      header = "#{command.identity}"
+      header = "\n#{command.identity}"
       header << " -- #{command.description}" if command.description
       header
     end
