@@ -15,7 +15,7 @@ describe(Mercenary::Presenter) do
   end
 
   it "knows how to present the command" do
-    expect(presenter.command_presentation).to eql("script_name subcommand 1.4.2 -- Do all the things.\n\nUsage:\n\n  script_name subcommand\n\nOptions:\n        -1, --one          The first option\n        -2, --two          The second option")
+    expect(presenter.command_presentation).to eql("\nscript_name subcommand 1.4.2 -- Do all the things.\n\nUsage:\n\n  script_name subcommand\n\nOptions:\n        -1, --one          The first option\n        -2, --two          The second option")
   end
 
   it "knows how to present the subcommands, without duplicates for aliases" do
