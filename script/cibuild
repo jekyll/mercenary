@@ -3,4 +3,5 @@
 set -ex
 
 bundle exec rspec
-./script/examples
+script/fmt
+script/examples

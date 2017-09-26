@@ -1,12 +1,14 @@
-require File.expand_path("../mercenary/version", __FILE__)
+# frozen_string_literal: true
+
+require File.expand_path("mercenary/version", __dir__)
 require "optparse"
 require "logger"
 
 module Mercenary
-  autoload :Command,   File.expand_path("../mercenary/command", __FILE__)
-  autoload :Option,    File.expand_path("../mercenary/option", __FILE__)
-  autoload :Presenter, File.expand_path("../mercenary/presenter", __FILE__)
-  autoload :Program,   File.expand_path("../mercenary/program", __FILE__)
+  autoload :Command,   File.expand_path("mercenary/command", __dir__)
+  autoload :Option,    File.expand_path("mercenary/option", __dir__)
+  autoload :Presenter, File.expand_path("mercenary/presenter", __dir__)
+  autoload :Program,   File.expand_path("mercenary/program", __dir__)
 
   # Public: Instantiate a new program and execute.
   #

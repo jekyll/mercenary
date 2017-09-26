@@ -1,9 +1,11 @@
-require 'spec_helper'
+# frozen_string_literal: true
+
+require "spec_helper"
 
 describe(Mercenary::Option) do
   let(:config_key)  { "largo" }
   let(:description) { "This is a description" }
-  let(:switches)    { ['-l', '--largo'] }
+  let(:switches)    { ["-l", "--largo"] }
   let(:option)      { described_class.new(config_key, [switches, description].flatten.reject(&:nil?)) }
 
   it "knows its config key" do
@@ -27,20 +29,20 @@ describe(Mercenary::Option) do
   end
 
   it "compares itself with other options well" do
-    new_option = described_class.new(config_key, ['-l', '--largo', description])
+    new_option = described_class.new(config_key, ["-l", "--largo", description])
     expect(option.eql?(new_option)).to be(true)
     expect(option.hash.eql?(new_option.hash)).to be(true)
   end
 
   it "has a custom #hash" do
-    expect(option.hash.to_s).to match(/\d+/)
+    expect(option.hash.to_s).to match(%r!\d+!)
   end
 
   context "with just the long switch" do
-    let(:switches) { ['--largo'] }
+    let(:switches) { ["--largo"] }
 
     it "adds an empty string in place of the short switch" do
-      expect(option.switches).to eql(['', '--largo'])
+      expect(option.switches).to eql(["", "--largo"])
     end
 
     it "sets its description properly" do
@@ -53,10 +55,10 @@ describe(Mercenary::Option) do
   end
 
   context "with just the short switch" do
-    let(:switches) { ['-l'] }
+    let(:switches) { ["-l"] }
 
     it "adds an empty string in place of the long switch" do
-      expect(option.switches).to eql(['-l', ''])
+      expect(option.switches).to eql(["-l", ""])
     end
 
     it "sets its description properly" do
@@ -79,5 +81,4 @@ describe(Mercenary::Option) do
       expect(option.switches).to eql(switches)
     end
   end
-
 end

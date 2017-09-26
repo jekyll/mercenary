@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mercenary
   class Presenter
     attr_accessor :command
@@ -27,7 +29,7 @@ module Mercenary
     end
 
     def command_options_presentation
-      return nil unless command.options.size > 0
+      return nil if command.options.empty?
       command.options.map(&:to_s).join("\n")
     end
 
@@ -44,7 +46,7 @@ module Mercenary
     #
     # Returns the string representation of the subcommands
     def subcommands_presentation
-      return nil unless command.commands.size > 0
+      return nil if command.commands.empty?
       command.commands.values.uniq.map(&:summarize).join("\n")
     end
 
@@ -52,7 +54,7 @@ module Mercenary
     #
     # Returns the command header as a String
     def command_header
-      header = "#{command.identity}"
+      header = command.identity.to_s
       header << " -- #{command.description}" if command.description
       header
     end
@@ -83,11 +85,12 @@ module Mercenary
     #
     # Returns the value of whatever function is called
     def method_missing(meth, *args, &block)
-      if meth.to_s =~ /^print_(.+)$/
-        send("#{$1.downcase}_presentation")
+      if meth.to_s =~ %r!^print_(.+)$!
+        send("#{Regexp.last_match(1).downcase}_presentation")
       else
-        super # You *must* call super if you don't handle the method,
-              # otherwise you'll mess up Ruby's method lookup.
+        # You *must* call super if you don't handle the method,
+        # otherwise you'll mess up Ruby's method lookup.
+        super
       end
     end
   end

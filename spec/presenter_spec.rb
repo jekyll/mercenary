@@ -1,4 +1,6 @@
-require 'spec_helper'
+# frozen_string_literal: true
+
+require "spec_helper"
 
 describe(Mercenary::Presenter) do
   let(:supercommand) { Mercenary::Command.new(:script_name) }
@@ -6,10 +8,10 @@ describe(Mercenary::Presenter) do
   let(:presenter) { described_class.new(command) }
 
   before(:each) do
-    command.version '1.4.2'
-    command.description 'Do all the things.'
-    command.option 'one', '-1', '--one', 'The first option'
-    command.option 'two', '-2', '--two', 'The second option'
+    command.version "1.4.2"
+    command.description "Do all the things."
+    command.option "one", "-1", "--one", "The first option"
+    command.option "two", "-2", "--two", "The second option"
     command.alias :cmd
     supercommand.commands[command.name] = command
   end
