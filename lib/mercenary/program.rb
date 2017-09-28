@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mercenary
   class Program < Command
     attr_reader :optparse
@@ -31,7 +33,7 @@ module Mercenary
         @optparse.parse!(argv)
       rescue OptionParser::InvalidOption => e
         logger.error "Whoops, we can't understand your command."
-        logger.error "#{e.message}"
+        logger.error e.message.to_s
         logger.error "Run your command again with the --help switch to see available options."
         abort
       end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Mercenary
   class Option
     attr_reader :config_key, :description, :short, :long, :return_type
@@ -11,10 +13,10 @@ module Mercenary
     #
     # Returns nothing
     def initialize(config_key, info)
-      @config_key  = config_key
+      @config_key = config_key
       while arg = info.shift
         begin
-          @return_type = Object.const_get("#{arg}")
+          @return_type = Object.const_get(arg.to_s)
           next
         rescue NameError
         end
@@ -34,7 +36,7 @@ module Mercenary
     #
     # Returns the array which OptionParser#on wants
     def for_option_parser
-      [short, long, return_type, description].flatten.reject{ |o| o.to_s.empty? }
+      [short, long, return_type, description].flatten.reject { |o| o.to_s.empty? }
     end
 
     # Public: Build a string representation of this option including the
@@ -51,8 +53,8 @@ module Mercenary
     def formatted_switches
       [
         switches.first.rjust(10),
-        switches.last.ljust(13)
-      ].join(", ").gsub(/ , /, '   ').gsub(/,   /, '    ')
+        switches.last.ljust(13),
+      ].join(", ").gsub(%r! , !, "   ").gsub(%r!,   !, "    ")
     end
 
     # Public: Hash based on the hash value of instance variables
@@ -82,6 +84,5 @@ module Mercenary
     def switches
       [short, long].map(&:to_s)
     end
-
   end
 end

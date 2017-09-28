@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
-$:.unshift File.join(File.dirname(__FILE__), *%w{ .. lib })
+$LOAD_PATH.unshift File.join(__dir__, "..", "lib")
 
 require "mercenary"
 
@@ -9,13 +10,11 @@ require "mercenary"
 # be output to STDOUT.
 
 Mercenary.program(:trace) do |p|
-
   p.version "2.0.1"
-  p.description 'An example of traces in Mercenary'
-  p.syntax 'trace <subcommand>'
+  p.description "An example of traces in Mercenary"
+  p.syntax "trace <subcommand>"
 
   p.action do |_, _|
-    raise ArgumentError.new("YOU DID SOMETHING TERRIBLE YOU BUFFOON")
+    raise ArgumentError, "YOU DID SOMETHING TERRIBLE YOU BUFFOON"
   end
-
 end

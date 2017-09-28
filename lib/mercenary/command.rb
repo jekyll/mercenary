@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 module Mercenary
   class Command
     attr_reader :name
@@ -48,7 +50,7 @@ module Mercenary
       @syntax = syntax if syntax
       syntax_list = []
       if parent
-        syntax_list << parent.syntax.to_s.gsub(/<[\w\s-]+>/, '').gsub(/\[[\w\s-]+\]/, '').strip
+        syntax_list << parent.syntax.to_s.gsub(%r!<[\w\s-]+>!, "").gsub(%r!\[[\w\s-]+\]!, "").strip
       end
       syntax_list << (@syntax || name.to_s)
       syntax_list.join(" ")
@@ -72,11 +74,11 @@ module Mercenary
     # Returns the default command if there is one, `nil` otherwise
     def default_command(command_name = nil)
       if command_name
-        if commands.has_key?(command_name)
+        if commands.key?(command_name)
           @default_command = commands[command_name] if command_name
           @default_command
         else
-          raise ArgumentError.new("'#{command_name}' couldn't be found in this command's list of commands.")
+          raise ArgumentError, "'#{command_name}' couldn't be found in this command's list of commands."
         end
       else
         @default_command
@@ -133,11 +135,12 @@ module Mercenary
     # level - the logger level (a Logger constant, see docs for more info)
     #
     # Returns the instance of Logger
+
     def logger(level = nil)
       unless @logger
         @logger = Logger.new(STDOUT)
         @logger.level = level || Logger::INFO
-        @logger.formatter = proc do |severity, datetime, progname, msg|
+        @logger.formatter = proc do |severity, _datetime, _progname, msg|
           "#{identity} | " << "#{severity.downcase.capitalize}:".ljust(7) << " #{msg}\n"
         end
       end
@@ -189,15 +192,15 @@ module Mercenary
     #
     # Returns nothing
     def add_default_options(opts)
-      option 'show_help', '-h', '--help', 'Show this message'
-      option 'show_version', '-v', '--version', 'Print the name and version'
-      option 'show_backtrace', '-t', '--trace', 'Show the full backtrace when an error occurs'
+      option "show_help", "-h", "--help", "Show this message"
+      option "show_version", "-v", "--version", "Print the name and version"
+      option "show_backtrace", "-t", "--trace", "Show the full backtrace when an error occurs"
       opts.on("-v", "--version", "Print the version") do
         puts "#{name} #{version}"
         exit(0)
       end
 
-      opts.on('-t', '--trace', 'Show full backtrace if an error occurs') do
+      opts.on("-t", "--trace", "Show full backtrace if an error occurs") do
         @trace = true
       end
 

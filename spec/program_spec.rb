@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 describe(Mercenary::Program) do
-
   context "a basic program" do
     let(:program) { Mercenary::Program.new(:my_name) }
 
@@ -15,5 +16,4 @@ describe(Mercenary::Program) do
       expect(program.version).to eq(version)
     end
   end
-
 end

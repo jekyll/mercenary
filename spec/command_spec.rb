@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require "spec_helper"
 
 describe(Mercenary::Command) do
-
   context "a basic command" do
     let(:command) { Mercenary::Command.new(:my_name) }
     let(:parent)  { Mercenary::Command.new(:my_parent) }
@@ -17,7 +18,7 @@ describe(Mercenary::Command) do
       )
     end
     let(:add_sub) do
-      Proc.new do |c|
+      proc do |c|
         c.command(:sub_command) { |p| }
       end
     end
@@ -56,7 +57,7 @@ describe(Mercenary::Command) do
 
     it "can set its options" do
       name = "show_drafts"
-      opts  = ['--drafts', 'Render posts in the _drafts folder']
+      opts = ["--drafts", "Render posts in the _drafts folder"]
       option = Mercenary::Option.new(name, opts)
       command.option name, *opts
       expect(command.options).to eql([option])
@@ -68,7 +69,7 @@ describe(Mercenary::Command) do
     end
 
     it "knows its identity" do
-      command_with_parent.version '1.8.7'
+      command_with_parent.version "1.8.7"
       expect(command_with_parent.identity).to eql("my_parent i_have_parent 1.8.7")
     end
 
@@ -94,5 +95,4 @@ describe(Mercenary::Command) do
       end
     end
   end
-
 end
