@@ -1,3 +1,9 @@
+## HEAD
+
+### Development Fixes
+
+  * Adopt Jekyll&#39;s rubocop config for consistency (#51)
+
 ## 0.3.6 / 2016-04-07
 
 ### Bug Fixes
