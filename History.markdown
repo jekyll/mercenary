@@ -4,6 +4,10 @@
 
   * Adopt Jekyll&#39;s rubocop config for consistency (#51)
 
+### Documentation
+
+  * fixes the readme (#52)
+
 ## 0.3.6 / 2016-04-07
 
 ### Bug Fixes
