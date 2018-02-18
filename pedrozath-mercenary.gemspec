@@ -5,7 +5,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require "mercenary/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "mercenary"
+  spec.name          = "pedrozath-mercenary"
   spec.version       = Mercenary::VERSION
   spec.authors       = ["Tom Preston-Werner", "Parker Moore"]
   spec.email         = ["tom@mojombo.com", "parkrmoore@gmail.com"]
