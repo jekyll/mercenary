@@ -21,12 +21,22 @@ module Mercenary
     #
     # Returns nothing
     def go(argv)
+      if argv.empty?
+        default_command.execute
+        abort
+      end
+
       logger.debug("Using args passed in: #{argv.inspect}")
 
       cmd = nil
 
       @optparse = OptionParser.new do |opts|
         cmd = super(argv, opts, @config)
+      end
+
+      if cmd.actions.compact.empty?
+        logger.error 'Invalid command.'
+        abort
       end
 
       begin
