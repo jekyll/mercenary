@@ -1,8 +1,9 @@
 ---
 AllCops:
-  TargetRubyVersion: 2.0
+  TargetRubyVersion: 2.3
   Exclude:
     - vendor/**/*
+
 Layout/AlignArray:
   Enabled: false
 Layout/AlignHash:
@@ -35,8 +36,6 @@ Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
 Layout/SpaceAroundOperators:
   Enabled: true
-Layout/SpaceInsideBrackets:
-  Enabled: false
 Lint/AssignmentInCondition:
   Exclude:
     - lib/mercenary/command.rb
@@ -45,13 +44,12 @@ Lint/AssignmentInCondition:
 Lint/DuplicateMethods:
   Exclude:
     - lib/mercenary/command.rb
-Lint/EndAlignment:
+Layout/EndAlignment:
   Severity: error
 Lint/HandleExceptions:
   Exclude:
     - lib/mercenary/option.rb
-Lint/RescueWithoutErrorClass:
-  Enabled: false
+Style/RescueStandardError:
   Exclude:
     - lib/mercenary/program.rb
 Lint/UselessAssignment:
@@ -123,8 +121,6 @@ Style/Documentation:
   Enabled: false
 Style/DoubleNegation:
   Enabled: false
-Style/Encoding:
-  EnforcedStyle: when_needed
 Style/GuardClause:
   Enabled: false
 Style/HashSyntax:
@@ -134,7 +130,7 @@ Style/IfUnlessModifier:
   Enabled: false
 Style/InverseMethods:
   Enabled: false
-Style/MethodMissing:
+Style/MissingRespondToMissing:
   Exclude:
     - lib/mercenary/presenter.rb
 Style/ModuleFunction:
@@ -168,7 +164,9 @@ Style/StringLiteralsInInterpolation:
   EnforcedStyle: double_quotes
 Style/SymbolArray:
   Enabled: false
-Style/TrailingCommaInLiteral:
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: consistent_comma
+Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
 Style/UnneededCapitalW:
   Enabled: false
