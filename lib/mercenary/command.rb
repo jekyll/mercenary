@@ -231,7 +231,7 @@ module Mercenary
     # Returns true if this command is the parent of a command of name
     # 'sub_command' and false otherwise
     def has_command?(sub_command)
-      commands.keys.include?(sub_command)
+      commands.key?(sub_command)
     end
 
     # Public: Identify this command
@@ -245,7 +245,7 @@ module Mercenary
     #
     # Returns a string containing the name and version if it exists
     def identity
-      "#{full_name} #{version if version}".strip
+      "#{full_name} #{version}".strip
     end
 
     # Public: Get the name of the current command plus that of
@@ -254,7 +254,7 @@ module Mercenary
     # Returns the full name of the command
     def full_name
       the_name = []
-      the_name << parent.full_name if parent && parent.full_name
+      the_name << parent.full_name if parent&.full_name
       the_name << name
       the_name.join(" ")
     end
