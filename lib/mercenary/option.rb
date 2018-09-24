@@ -72,6 +72,7 @@ module Mercenary
     # Returns true if all the instance variables are equal, false otherwise
     def eql?(other)
       return false unless self.class.eql?(other.class)
+
       instance_variables.map do |var|
         instance_variable_get(var).eql?(other.instance_variable_get(var))
       end.all?
