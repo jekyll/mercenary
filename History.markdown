@@ -3,6 +3,7 @@
 ### Development Fixes
 
   * Adopt Jekyll&#39;s rubocop config for consistency (#51)
+  * Bump Rubocop (#56)
 
 ### Documentation
 
