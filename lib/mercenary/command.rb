@@ -31,11 +31,6 @@ module Mercenary
       @aliases  = []
     end
 
-    # Public: Returns true if this command has no parent
-    def root?
-      parent.nil?
-    end
-
     # Public: Sets or gets the command version
     #
     # version - the command version (optional)

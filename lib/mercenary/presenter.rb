@@ -31,8 +31,9 @@ module Mercenary
 
     def command_options_presentation
       return nil if command.options.empty?
+
       options = command.options
-      options -= command.parent.options unless command.root?
+      options -= command.parent.options if command.parent
       options.map(&:to_s).join("\n")
     end
 

@@ -36,11 +36,6 @@ describe(Mercenary::Command) do
       expect(add_sub.call(command).parent).to eq(command)
     end
 
-    it "can tell whether it is a parent command or not" do
-      expect(command.root?).to be true
-      expect(command_with_parent.root?).to be false
-    end
-
     it "can set its version" do
       version = "1.4.2"
       command.version version
