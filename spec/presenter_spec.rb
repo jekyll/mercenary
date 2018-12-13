@@ -8,8 +8,12 @@ describe(Mercenary::Presenter) do
   let(:presenter) { described_class.new(command) }
 
   before(:each) do
+    supercommand.option "version", "-v", "--version", "Show version"
+    supercommand.option "help", "-h", "--help", "Help!"
+
     command.version "1.4.2"
     command.description "Do all the things."
+    command.option "help", "-h", "--help", "Help!"
     command.option "one", "-1", "--one", "The first option"
     command.option "two", "-2", "--two", "The second option"
     command.alias :cmd
@@ -17,7 +21,7 @@ describe(Mercenary::Presenter) do
   end
 
   it "knows how to present the command" do
-    expect(presenter.command_presentation).to eql("script_name subcommand 1.4.2 -- Do all the things.\n\nUsage:\n\n  script_name subcommand\n\nOptions:\n        -1, --one          The first option\n        -2, --two          The second option")
+    expect(presenter.command_presentation).to eql("script_name subcommand 1.4.2 -- Do all the things.\n\nUsage:\n\n  script_name subcommand\n\nOptions:\n        -1, --one          The first option\n        -2, --two          The second option\n        -v, --version      Show version\n        -h, --help         Help!")
   end
 
   it "knows how to present the subcommands, without duplicates for aliases" do
@@ -29,7 +33,7 @@ describe(Mercenary::Presenter) do
   end
 
   it "knows how to present the options" do
-    expect(presenter.options_presentation).to eql("        -1, --one          The first option\n        -2, --two          The second option")
+    expect(presenter.options_presentation).to eql("        -1, --one          The first option\n        -2, --two          The second option\n        -v, --version      Show version\n        -h, --help         Help!")
   end
 
   it "allows you to say print_* instead of *_presentation" do
