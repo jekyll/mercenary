@@ -9,6 +9,10 @@
 
   * fixes the readme (#52)
 
+### Minor Enhancements
+
+  * Remove parent command&#39;s flags from subcommand usage (#44)
+
 ## 0.3.6 / 2016-04-07
 
 ### Bug Fixes
