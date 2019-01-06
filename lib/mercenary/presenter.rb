@@ -32,7 +32,9 @@ module Mercenary
     def command_options_presentation
       return nil if command.options.empty?
 
-      command.options.map(&:to_s).join("\n")
+      options = command.options
+      options -= command.parent.options if command.parent
+      options.map(&:to_s).join("\n")
     end
 
     # Public: Builds a string representation of the options for parent
