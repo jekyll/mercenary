@@ -42,7 +42,7 @@ module Mercenary
 
       begin
         cmd.execute(argv, @config)
-      rescue => e
+      rescue StandardError => e
         if cmd.trace
           raise e
         else

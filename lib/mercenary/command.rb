@@ -49,9 +49,7 @@ module Mercenary
     def syntax(syntax = nil)
       @syntax = syntax if syntax
       syntax_list = []
-      if parent
-        syntax_list << parent.syntax.to_s.gsub(%r!<[\w\s-]+>!, "").gsub(%r!\[[\w\s-]+\]!, "").strip
-      end
+      syntax_list << parent.syntax.to_s.gsub(%r!<[\w\s-]+>!, "").gsub(%r!\[[\w\s-]+\]!, "").strip if parent
       syntax_list << (@syntax || name.to_s)
       syntax_list.join(" ")
     end
