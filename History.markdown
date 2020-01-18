@@ -1,17 +1,20 @@
-## HEAD
+## 0.4.0 / 2020-01-18
 
-### Development Fixes
+### Major Enhancements
 
-  * Adopt Jekyll&#39;s rubocop config for consistency (#51)
-  * Bump Rubocop (#56)
-
-### Documentation
-
-  * fixes the readme (#52)
+  * Drop Ruby 2.3 support
 
 ### Minor Enhancements
 
   * Remove parent command&#39;s flags from subcommand usage (#44)
+
+### Development Fixes
+
+  * Adopt Jekyll&#39;s rubocop config for consistency
+
+### Documentation
+
+  * fixes the readme (#52)
 
 ## 0.3.6 / 2016-04-07
 
