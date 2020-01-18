@@ -1,14 +1,14 @@
 ---
 AllCops:
-  TargetRubyVersion: 2.3
+  TargetRubyVersion: 2.4
   Exclude:
     - vendor/**/*
 
-Layout/AlignArray:
+Layout/ArrayAlignment:
   Enabled: false
-Layout/AlignHash:
+Layout/HashAlignment:
   EnforcedHashRocketStyle: table
-Layout/AlignParameters:
+Layout/ParameterAlignment:
   Enabled: false
 Layout/EmptyLinesAroundAccessModifier:
   Enabled: false
@@ -22,11 +22,11 @@ Layout/FirstParameterIndentation:
   EnforcedStyle: consistent
 Layout/IndentationWidth:
   Severity: error
-Layout/IndentArray:
+Layout/FirstArrayElementIndentation:
   EnforcedStyle: consistent
-Layout/IndentHash:
+Layout/FirstHashElementIndentation:
   EnforcedStyle: consistent
-Layout/IndentHeredoc:
+Layout/HeredocIndentation:
   Enabled: false
   Exclude:
       - spec/**/*
@@ -46,7 +46,7 @@ Lint/DuplicateMethods:
     - lib/mercenary/command.rb
 Layout/EndAlignment:
   Severity: error
-Lint/HandleExceptions:
+Lint/SuppressedException:
   Exclude:
     - lib/mercenary/option.rb
 Style/RescueStandardError:
@@ -168,5 +168,5 @@ Style/TrailingCommaInArrayLiteral:
   EnforcedStyleForMultiline: consistent_comma
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: consistent_comma
-Style/UnneededCapitalW:
+Style/RedundantCapitalW:
   Enabled: false
