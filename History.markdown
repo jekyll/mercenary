@@ -4,6 +4,7 @@
 
   * Add GitHub Actions &amp; Dependabot configurations (#60)
   * Update rubocop-jekyll requirement from ~&gt; 0.10.0 to ~&gt; 0.11.0 (#61)
+  * Bump `rubocop-jekyll` to v0.12.x (#63)
 
 ## 0.4.0 / 2020-01-18
 
