@@ -1,3 +1,9 @@
+## HEAD
+
+### Development Fixes
+
+  * Add GitHub Actions &amp; Dependabot configurations (#60)
+
 ## 0.4.0 / 2020-01-18
 
 ### Major Enhancements
