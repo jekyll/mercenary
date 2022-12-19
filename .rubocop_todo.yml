@@ -31,7 +31,7 @@ Lint/DuplicateMethods:
 
 # Offense count: 1
 # Configuration parameters: AllowComments.
-Lint/HandleExceptions:
+Lint/SuppressedException:
   Exclude:
     - 'lib/mercenary/option.rb'
 
@@ -54,7 +54,7 @@ Metrics/BlockLength:
 # Cop supports --auto-correct.
 # Configuration parameters: AutoCorrect, AllowHeredoc, AllowURI, URISchemes, IgnoreCopDirectives, IgnoredPatterns.
 # URISchemes: http, https
-Metrics/LineLength:
+Layout/LineLength:
   Max: 319
 
 # Offense count: 1
