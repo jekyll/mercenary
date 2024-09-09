@@ -6,6 +6,7 @@
   * Update rubocop-jekyll requirement from ~&gt; 0.10.0 to ~&gt; 0.11.0 (#61)
   * Bump `rubocop-jekyll` to v0.12.x (#63)
   * Remove superfluous items from gem package (#66)
+  * Move development dependencies to Gemfile (#67)
 
 ## 0.4.0 / 2020-01-18
 
