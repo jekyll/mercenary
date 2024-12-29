@@ -7,6 +7,7 @@
   * Bump `rubocop-jekyll` to v0.12.x (#63)
   * Remove superfluous items from gem package (#66)
   * Move development dependencies to Gemfile (#67)
+  * Remove unnecessary Travis CI configuration file (#71)
 
 ## 0.4.0 / 2020-01-18
 
