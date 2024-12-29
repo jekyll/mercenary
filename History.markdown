@@ -8,6 +8,7 @@
   * Remove superfluous items from gem package (#66)
   * Move development dependencies to Gemfile (#67)
   * Remove unnecessary Travis CI configuration file (#71)
+  * Bump `actions/checkout` to v4 (#70)
 
 ## 0.4.0 / 2020-01-18
 
