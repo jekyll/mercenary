@@ -17,5 +17,5 @@ Gem::Specification.new do |spec|
   spec.files         = `git ls-files lib History.markdown LICENSE.txt README.md`.split($INPUT_RECORD_SEPARATOR)
   spec.require_paths = ["lib"]
 
-  spec.required_ruby_version = ">= 2.4.0"
+  spec.required_ruby_version = ">= 2.7.0"
 end
