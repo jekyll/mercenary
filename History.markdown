@@ -10,6 +10,10 @@
   * Remove unnecessary Travis CI configuration file (#71)
   * Bump `actions/checkout` to v4 (#70)
 
+### Minor Enhancements
+
+  * Bump minimum required Ruby version to 2.7 (#72)
+
 ## 0.4.0 / 2020-01-18
 
 ### Major Enhancements
