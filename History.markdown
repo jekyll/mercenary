@@ -9,6 +9,7 @@
   * Move development dependencies to Gemfile (#67)
   * Remove unnecessary Travis CI configuration file (#71)
   * Bump `actions/checkout` to v4 (#70)
+  * Bump RuboCop version to v1.57 (#73)
 
 ### Minor Enhancements
 
