@@ -15,6 +15,7 @@
 ### Minor Enhancements
 
   * Bump minimum required Ruby version to 2.7 (#72)
+  * Add gem `logger` as a runtime dependency (#68)
 
 ## 0.4.0 / 2020-01-18
 
