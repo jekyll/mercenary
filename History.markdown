@@ -10,6 +10,7 @@
   * Remove unnecessary Travis CI configuration file (#71)
   * Bump `actions/checkout` to v4 (#70)
   * Bump RuboCop version to v1.57 (#73)
+  * Update CI workflow to test with Ruby 3.4 (#69)
 
 ### Minor Enhancements
 
