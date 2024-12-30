@@ -7,6 +7,14 @@
   * Bump `rubocop-jekyll` to v0.12.x (#63)
   * Remove superfluous items from gem package (#66)
   * Move development dependencies to Gemfile (#67)
+  * Remove unnecessary Travis CI configuration file (#71)
+  * Bump `actions/checkout` to v4 (#70)
+  * Bump RuboCop version to v1.57 (#73)
+  * Update CI workflow to test with Ruby 3.4 (#69)
+
+### Minor Enhancements
+
+  * Bump minimum required Ruby version to 2.7 (#72)
 
 ## 0.4.0 / 2020-01-18
 
